@@ -1,20 +1,31 @@
 import { useState } from "react";
-import type { TaskPriority, TaskStatus } from "../../types";
+import type { Task, TaskPriority, TaskStatus } from "../../types";
+import { isValidText } from "../../utils/taskUtils";
 
 interface TaskFormProps {
     onSubmit: (task: Task) => void;
   }
   
 
-const TaskForm = () => {
+const TaskForm = ({onSubmit} : TaskFormProps) => {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState<TaskStatus>('todo');
   const [priority, setPriority] = useState<TaskPriority>('medium');
 
+  const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!isValidText(title)) {
+        setError('Task title is mandatory'); 
+        return;
+    }
+    setError(null); // clear any error before this point
+
+    
    
     console.log('Form submitted with:', { title, description, status, priority });
   };
