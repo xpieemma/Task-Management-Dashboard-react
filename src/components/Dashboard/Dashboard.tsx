@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Task } from "../../types";
 import TaskList from "../TaskList/TaskList";
+import TaskForm from "../TaskForm/TaskForm";
 
 const initialTasks: Task[] = [{
     id: '1',
@@ -77,6 +78,10 @@ createdAt: new Date().toISOString(),
 export default function Dashboard () {
     const [tasks, setTasks] = useState<Task[]>(initialTasks);
 
+    const handleTaskAdded = (newTask: Task) => {
+        setTasks([newTask, ...tasks]);
+    };
+
     return (
         <>
         <div className="min-h-screen bg-slate-50 p-4 md:p-8">
@@ -109,7 +114,7 @@ export default function Dashboard () {
         Add Task
     </h2>
     <div className="text-slate-450 text-sm border-2 border-dashed border-slate-200 rounded p-4 text-center">
-        TaskForm Component
+        <TaskForm onSubmit={handleTaskAdded} />
     </div>
 
 </section>
