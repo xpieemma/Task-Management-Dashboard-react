@@ -81,6 +81,20 @@ export default function Dashboard () {
     const handleTaskAdded = (newTask: Task) => {
         setTasks([newTask, ...tasks]);
     };
+    const handleStatusToggled = (id: string) => {
+        setTasks(tasks.map(task => {
+            if (task.id === id) {
+                const nStatus = task.status === 'done' ? 'todo' : 'done';
+                return {... task, status: nStatus};
+            }
+            return task;
+        }))
+    };
+
+    const toDelete = (id: string) => {
+        setTasks(tasks.filter(task => task.id !== id)); // filter to create a new array
+        // this array should have element where the id does not match to this specific id
+    };
 
     return (
         <>
@@ -129,7 +143,11 @@ export default function Dashboard () {
                 </h2>
             </div>
             <div className="text-slate-400 text-sm border-2 border-dashed border-slate-200 rounded p-12 text-center h-full flex items-center justify-center">
-                TaskList Component
+                <TaskList 
+                tasks={tasks}
+                onToggleStatus={handleStatusToggled}
+                onDelete={toDelete}
+                />
             </div>
         </section>
     </div>
