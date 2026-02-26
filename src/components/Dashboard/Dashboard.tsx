@@ -1,42 +1,76 @@
 import { useState } from "react";
 import type { Task } from "../../types";
+import TaskList from "../TaskList/TaskList";
 
 const initialTasks: Task[] = [{
     id: '1',
-    tittle: 'Complete React Assessment',
-    description: 'Build a Task Management',
-    status: 'in-progress',
+    tittle: 'Complete REST assignment',
+    description: 'Build a Rest Country API',
+    status: 'done',
     priority: 'high',
     createdAt: new Date().toISOString(),
 }, 
-{id: '1',
+{id: '2',
 tittle: 'Complete React Assessment',
 description: 'Build a Task Management',
 status: 'in-progress',
 priority: 'high',
 createdAt: new Date().toISOString(),
 }, 
-{id: '1',
-    tittle: 'Complete React Assessment',
-    description: 'Build a Task Management',
-    status: 'in-progress',
-    priority: 'high',
+{id: '3',
+    tittle: 'Come to class',
+    description: 'Having disposition to learn',
+    status: 'done',
+    priority: 'low',
     createdAt: new Date().toISOString(),
     },
-    {id: '1',
-        tittle: 'Complete React Assessment',
-        description: 'Build a Task Management',
-        status: 'in-progress',
-        priority: 'high',
+    {id: '4',
+        tittle: 'Complete JRA 2 requirements',
+        description: 'Elevator pitch, resume and Linkedin page',
+        status: 'todo',
+        priority: 'medium',
         createdAt: new Date().toISOString(),
         },
-        {id: '1',
-            tittle: 'Complete React Assessment',
-            description: 'Build a Task Management',
-            status: 'in-progress',
-            priority: 'high',
-            createdAt: new Date().toISOString(),
-            }];
+//         {id: '5',
+//             tittle: 'Complete React Assessment',
+//             description: 'Build a Task Management',
+//             status: 'in-progress',
+//             priority: 'high',
+//             createdAt: new Date().toISOString(),
+           // }
+           //,
+//         {id: '5',
+//             tittle: 'Complete React Assessment',
+//             description: 'Build a Task Management',
+//             status: 'in-progress',
+//             priority: 'high',
+//             createdAt: new Date().toISOString(),
+           // }
+            //,
+//         {id: '5',
+//             tittle: 'Complete React Assessment',
+//             description: 'Build a Task Management',
+//             status: 'in-progress',
+//             priority: 'high',
+//             createdAt: new Date().toISOString(),
+           // }
+            //,
+//         {id: '8',
+//             tittle: 'Complete React Assessment',
+//             description: 'Build a Task Management',
+//             status: 'in-progress',
+//             priority: 'high',
+//             createdAt: new Date().toISOString(),
+           // }
+            //,
+//         {id: '9',
+//             tittle: 'Complete React Assessment',
+//             description: 'Build a Task Management',
+//             status: 'in-progress',
+//             priority: 'low',
+//             createdAt: new Date().toISOString(),
+           // }
+        ];
 
 
 
@@ -81,7 +115,7 @@ export default function Dashboard () {
 </section>
     </div>
 
-
+    <TaskList tasks={tasks} />
     <div className="lg:col-span-2">
         <section className="bg-white p-8 rounded-xl shadow-sm border border-slate-150 min-h-[500px]">
             <div className="flex justify-between items-center mb-6">
