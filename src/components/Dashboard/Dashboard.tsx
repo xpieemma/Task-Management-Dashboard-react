@@ -1,9 +1,47 @@
+import { useState } from "react";
+import type { Task } from "../../types";
 
-
+const initialTasks: Task[] = [{
+    id: '1',
+    tittle: 'Complete React Assessment',
+    description: 'Build a Task Management',
+    status: 'in-progress',
+    priority: 'high',
+    createdAt: new Date().toISOString(),
+}, 
+{id: '1',
+tittle: 'Complete React Assessment',
+description: 'Build a Task Management',
+status: 'in-progress',
+priority: 'high',
+createdAt: new Date().toISOString(),
+}, 
+{id: '1',
+    tittle: 'Complete React Assessment',
+    description: 'Build a Task Management',
+    status: 'in-progress',
+    priority: 'high',
+    createdAt: new Date().toISOString(),
+    },
+    {id: '1',
+        tittle: 'Complete React Assessment',
+        description: 'Build a Task Management',
+        status: 'in-progress',
+        priority: 'high',
+        createdAt: new Date().toISOString(),
+        },
+        {id: '1',
+            tittle: 'Complete React Assessment',
+            description: 'Build a Task Management',
+            status: 'in-progress',
+            priority: 'high',
+            createdAt: new Date().toISOString(),
+            }];
 
 
 
 export default function Dashboard () {
+    const [tasks, setTasks] = useState<Task[]>(initialTasks);
 
     return (
         <>
@@ -47,7 +85,7 @@ export default function Dashboard () {
     <div className="lg:col-span-2">
         <section className="bg-white p-8 rounded-xl shadow-sm border border-slate-150 min-h-[500px]">
             <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold text-slate-800">Tasks 
+                <h2 className="text-xl font-semibold text-slate-800">Tasks {tasks.length}
 
                 </h2>
             </div>
