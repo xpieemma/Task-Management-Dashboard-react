@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Task, TaskPriority, TaskStatus } from "../../types";
-import { isValidText } from "../../utils/taskUtils";
+import { generatedUniqueId, isValidText } from "../../utils/taskUtils";
 
 interface TaskFormProps {
     onSubmit: (task: Task) => void;
@@ -25,9 +25,25 @@ const TaskForm = ({onSubmit} : TaskFormProps) => {
     }
     setError(null); // clear any error before this point
 
-    
+    const newTask : Task ={
+        id: generatedUniqueId(),
+        tittle: title.trim(),
+        description: description.trim(),
+        status,
+        priority,
+        createdAt: new Date().toISOString()
+    }
    
-    console.log('Form submitted with:', { title, description, status, priority });
+    //used to pass new task to the dashboard 
+onSubmit(newTask);
+
+//reset form for other newTask
+setTitle('');
+setDescription('')
+    setStatus('todo');
+    setPriority('medium')
+
+    // console.log('Form submitted with:', { title, description, status, priority });
   };
 
   return (
@@ -36,16 +52,19 @@ const TaskForm = ({onSubmit} : TaskFormProps) => {
      
       <div className="flex flex-col gap-1">
         <label htmlFor="title" className="text-sm font-medium text-slate-700">
-          Task Title
+          Task Title <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
           id="title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="e.g., Complete React Assessment"
-          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          onChange={(e) => {setTitle(e.target.value)
+        if (error) setError(null); }}
+        placeholder="Par example: Complete React Assessment"
+          className={`w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 
+            $ {error ? 'border-red-500 focus:bordr-red-500 focus:ring-red-500' : 'border-slate-300 focus:border-indigo-500 focus:ring-indigo-500'}`}
         />
+        {error && <span className="text-xs text-red-500">{error}</span>}
       </div>
 
      
