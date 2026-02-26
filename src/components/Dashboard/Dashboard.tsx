@@ -4,9 +4,9 @@ import TaskList from "../TaskList/TaskList";
 import TaskForm from "../TaskForm/TaskForm";
 import TaskFilter from "../TaskFilter/TaskFilter";
 
-type Sorting = 'newest' | 'oldest' | 'high-priority' | 'low-priority';
+type Sorting = "newest" | "oldest" | "high-priority" | "low-priority";
 
-const priorityValue = {high: 4, medium:2.8, low: 1.8};
+const priorityValue = { high: 4, medium: 2.8, low: 1.8 };
 const initialTasks: Task[] = [
   {
     id: "1",
@@ -40,45 +40,46 @@ const initialTasks: Task[] = [
     priority: "medium",
     createdAt: new Date().toISOString(),
   },
-          {id: '5',
-              tittle: 'lab 11',
-              description: 'Build a Task Management',
-              status: 'in-progress',
-              priority: 'high',
-              createdAt: new Date().toISOString(),
-  }
-  ,
-          {id: '5',
-              tittle: 'lab 12',
-              description: 'Build a project',
-              status: 'in-progress',
-              priority: 'high',
-              createdAt: new Date().toISOString(),
-  }
-  ,
-          {id: '5',
-              tittle: 'lab 14',
-              description: 'Build',
-              status: 'in-progress',
-              priority: 'high',
-              createdAt: new Date().toISOString(),
-  }
-  ,
-          {id: '8',
-              tittle: 'sba 19',
-              description: 'Build a Task',
-              status: 'in-progress',
-              priority: 'high',
-              createdAt: new Date().toISOString(),
-  }
-  ,
-          {id: '9',
-              tittle: 'Complete React Assessment',
-              description: 'Mange',
-              status: 'in-progress',
-              priority: 'low',
-              createdAt: new Date().toISOString(),
-  }
+  {
+    id: "5",
+    tittle: "lab 11",
+    description: "Build a Task Management",
+    status: "in-progress",
+    priority: "high",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "5",
+    tittle: "lab 12",
+    description: "Build a project",
+    status: "in-progress",
+    priority: "high",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "5",
+    tittle: "lab 14",
+    description: "Build",
+    status: "in-progress",
+    priority: "high",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "8",
+    tittle: "sba 19",
+    description: "Build a Task",
+    status: "in-progress",
+    priority: "high",
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: "9",
+    tittle: "Complete React Assessment",
+    description: "Mange",
+    status: "in-progress",
+    priority: "low",
+    createdAt: new Date().toISOString(),
+  },
 ];
 
 export default function Dashboard() {
@@ -108,11 +109,14 @@ export default function Dashboard() {
   }>({ search: "", status: "all", priority: "all" });
 
   const tasksFiltered = tasks.filter((task) => {
-    const searchMached =
+    const searchMatched =
       task.tittle.toLowerCase().includes(filters.search.toLowerCase()) ||
       task.description.toLowerCase().includes(filters.search.toLowerCase());
-
-    return searchMached;
+    const statusMatched =
+      filters.status === "all" || task.status === filters.status;
+    const priorityMatched =
+      filters.priority === "all" || task.priority === filters.priority;
+    return searchMatched && statusMatched && priorityMatched;
   });
 
   // const handleStatusToggled = (id: string) => {
@@ -126,21 +130,30 @@ export default function Dashboard() {
     // this array should have element where the id does not match to this specific id
   };
 
-  const[sorting, setSorting] =useState<Sorting>('newest');
+  const [sorting, setSorting] = useState<Sorting>("newest");
 
   const sorted_filtered = [...tasksFiltered].sort((t0, t1) => {
-    switch(sorting) {
-        case 'newest':
-            return new Date(t1.createdAt).getTime() - new Date(t0.createdAt).getTime();
-        case 'oldest': 
-        return new Date(t0.createdAt).getTime() -new Date(t1.createdAt).getTime();
-        case 'high-priority':
-            return priorityValue [t0.priority] - priorityValue[t1.priority];
-        default: 
+    switch (sorting) {
+      case "newest":
+        return (
+          new Date(t1.createdAt).getTime() - new Date(t0.createdAt).getTime()
+        );
+      case "oldest":
+        return (
+          new Date(t0.createdAt).getTime() - new Date(t1.createdAt).getTime()
+        );
+      case "high-priority":
+        return priorityValue[t0.priority] - priorityValue[t1.priority];
+      default:
         return 0;
     }
-
   });
+
+  const sumTasks = tasks.length;
+  const sumTasksCompleted = tasks.filter(
+    (task) => task.status === "done",
+  ).length;
+  const sumTasksPending = sumTasks - sumTasksCompleted;
 
   return (
     <>
@@ -152,11 +165,86 @@ export default function Dashboard() {
             </h1>
           </header>
 
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-slate-500">
+                  Total Tasks
+                </p>
+                <p className="text-2xl font-bold text-slate-800">{sumTasks}</p>
+              </div>
+
+              <div className="p-3 bg-indigo-50 text-indigo-600 rounded-lg border border-indigo-100">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                  //clipboard with a checkmark 
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-slate-500">Completed</p>
+                <p className="text-2xl font-bold text-emerald-600">
+                  {sumTasksCompleted}
+                </p>
+              </div>
+              <div className="p-3 bg-emerald-50 text-emerald-600 rounded-lg border border-emerald-100">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"   //checkmark rounded icon
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-slate-500">Pending</p>
+                <p className="text-2xl font-bold text-amber-600">
+                  {sumTasksPending}
+                </p>
+              </div>
+              <div className="p-3 bg-amber-50 text-amber-600 rounded-lg border border-amber-100">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-1 flex flex-col gap-8">
               <section className="bg-white p-8 rounded-xl shadow-sm border border-slate-150">
                 <h2 className="text-lg font-semibold text-slate-850 mb-b">
-                  
                   Filters
                 </h2>
                 <TaskFilter
@@ -205,26 +293,36 @@ export default function Dashboard() {
                     Tasks ({sorted_filtered.length})
                   </h2>
                   <div className="flex items-center gap-2">
-                  <label htmlFor="sort" className="text-sm font-medium text-slate-600">Sort by:</label>
-            <select
-                    id="sort"
-                    value={sorting}
-                    onChange={(e) => setSorting(e.target.value as Sorting)}
-                    className="rounded-md border border-slate-300 py-1.5 pl-3 pr-8 text-sm bg-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                  >
-                    <option value="newest">Newest First</option>
-                    <option value="oldest">Oldest First</option>
-                    <option value="priority-high">Priority: High to Low</option>
-                    <option value="priority-low">Priority: Low to High</option>
-                  </select>
+                    <label
+                      htmlFor="sort"
+                      className="text-sm font-medium text-slate-600"
+                    >
+                      Sort by:
+                    </label>
+                    <select
+                      id="sort"
+                      value={sorting}
+                      onChange={(e) => setSorting(e.target.value as Sorting)}
+                      className="rounded-md border border-slate-300 py-1.5 pl-3 pr-8 text-sm bg-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                    >
+                      <option value="newest">Newest First</option>
+                      <option value="oldest">Oldest First</option>
+                      <option value="priority-high">
+                        Priority: High to Low
+                      </option>
+                      <option value="priority-low">
+                        Priority: Low to High
+                      </option>
+                    </select>
+                  </div>
                 </div>
-              </div>
 
                 <div className="text-slate-400 text-sm border-2 border-dashed border-slate-200 rounded p-12 text-center h-full flex items-center justify-center">
-                <TaskList 
-                tasks={sorted_filtered} 
-                onToggleStatus={handleStatusToggled}
-                onDelete={toDelete} />
+                  <TaskList
+                    tasks={sorted_filtered}
+                    onToggleStatus={handleStatusToggled}
+                    onDelete={toDelete}
+                  />
                 </div>
               </section>
             </div>
