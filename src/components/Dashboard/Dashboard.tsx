@@ -83,7 +83,17 @@ const initialTasks: Task[] = [
 ];
 
 export default function Dashboard() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    const tasksSaved = localStorage.getItem('task-data');
+    if (tasksSaved) {
+        try {
+            return JSON.parse(tasksSaved);
+        } catch (error){
+            console.error('tasks from localStorage failed', error);
+        }
+    }
+    return initialTasks
+  });
 
   const handleTaskAdded = (newTask: Task) => {
     setTasks([newTask, ...tasks]);
