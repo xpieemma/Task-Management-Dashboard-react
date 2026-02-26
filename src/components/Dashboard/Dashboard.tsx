@@ -33,23 +33,25 @@ export default function Dashboard () {
 </section>
 
 <section className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-    <h2>
+    <h2 className="text-lg font-semibold text-slate-800 mb-4">
         Add Task
     </h2>
-    <div>
+    <div className="text-slate-450 text-sm border-2 border-dashed border-slate-200 rounded p-4 text-center">
         TaskForm Component
     </div>
 
 </section>
     </div>
-    <div>
-        <section>
-            <div>
-                <h2>Tasks 
+
+
+    <div className="lg:col-span-2">
+        <section className="bg-white p-8 rounded-xl shadow-sm border border-slate-150 min-h-[500px]">
+            <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold text-slate-800">Tasks 
 
                 </h2>
             </div>
-            <div>
+            <div className="text-slate-400 text-sm border-2 border-dashed border-slate-200 rounded p-12 text-center h-full flex items-center justify-center">
                 TaskList Component
             </div>
         </section>
