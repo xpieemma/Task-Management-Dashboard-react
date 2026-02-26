@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Task, TaskPriority, TaskStatus } from "../../types";
 import TaskList from "../TaskList/TaskList";
 import TaskForm from "../TaskForm/TaskForm";
@@ -94,6 +94,10 @@ export default function Dashboard() {
     }
     return initialTasks
   });
+
+  useEffect(() => {
+    localStorage.setItem('task-data', JSON.stringify(tasks));
+  }, [tasks]);
 
   const handleTaskAdded = (newTask: Task) => {
     setTasks([newTask, ...tasks]);
