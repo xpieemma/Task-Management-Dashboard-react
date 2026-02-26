@@ -22,7 +22,7 @@ const initialTasks: Task[] = [
     description: "Build a Task Management",
     status: "in-progress",
     priority: "high",
-    createdAt: new Date().toISOString(),
+    createdAt: new Date(Date.now()-86400000).toISOString(),
   },
   {
     id: "3",
@@ -49,7 +49,7 @@ const initialTasks: Task[] = [
     createdAt: new Date().toISOString(),
   },
   {
-    id: "5",
+    id: "6",
     tittle: "lab 12",
     description: "Build a project",
     status: "in-progress",
@@ -57,7 +57,7 @@ const initialTasks: Task[] = [
     createdAt: new Date().toISOString(),
   },
   {
-    id: "5",
+    id: "7",
     tittle: "lab 14",
     description: "Build",
     status: "in-progress",
@@ -80,6 +80,19 @@ const initialTasks: Task[] = [
     priority: "low",
     createdAt: new Date().toISOString(),
   },
+  { id: "34", 
+    tittle: "Attend Group Project Meeting",
+     description: "Discuss API integration plan and assign responsibilities for the next sprint.",
+      status: "done", 
+      priority: "medium", 
+      createdAt: new Date().toISOString(),
+    }, 
+    { id: "45", 
+        tittle: "Update Personal Portfolio", 
+        description: "Add the latest class project and improve the layout of the projects section.",
+     status: "done", 
+         priority: "low", 
+        createdAt: "2026-02-05T17:40:00Z" },
 ];
 
 export default function Dashboard() {
@@ -169,180 +182,84 @@ export default function Dashboard() {
   ).length;
   const sumTasksPending = sumTasks - sumTasksCompleted;
 
+  
   return (
-    <>
-      <div className="min-h-screen bg-slate-50 p-4 md:p-8">
-        <div className="max-w-7xl mx-auto space-y-6">
-          <header className="flex justify-between items-center pb-4 border-b border-slate-200">
-            <h1 className="text-3xl font-bold text-slate-900">
-              Task DashBoard
-            </h1>
-          </header>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-slate-500">
-                  Total Tasks
-                </p>
-                <p className="text-2xl font-bold text-slate-800">{sumTasks}</p>
-              </div>
+      <div className="min-h-screen p-4 md:p-8 pt-20 md:pt-8 transition-colors duration-200">
+      <div className="max-w-7xl mx-auto space-y-6">
+        
+        <header className="flex justify-between items-center pb-4 border-b border-slate-200 dark:border-slate-700">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white transition-colors">Task Dashboard</h1>
+        </header>
 
-              <div className="p-3 bg-indigo-50 text-indigo-600 rounded-lg border border-indigo-100">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                  //clipboard with a checkmark 
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-                  />
-                </svg>
-              </div>
+        {/* Statistics Section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between transition-colors">
+            <div>
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Total Tasks</p>
+              <p className="text-2xl font-bold text-slate-800 dark:text-white">{sumTasks}</p>
             </div>
-
-            <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-slate-500">Completed</p>
-                <p className="text-2xl font-bold text-emerald-600">
-                  {sumTasksCompleted}
-                </p>
-              </div>
-              <div className="p-3 bg-emerald-50 text-emerald-600 rounded-lg border border-emerald-100">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"   //checkmark rounded icon
-                  />
-                </svg>
-              </div>
-            </div>
-
-            <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-slate-500">Pending</p>
-                <p className="text-2xl font-bold text-amber-600">
-                  {sumTasksPending}
-                </p>
-              </div>
-              <div className="p-3 bg-amber-50 text-amber-600 rounded-lg border border-amber-100">
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
+            <div className="p-3 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-lg border border-indigo-100 dark:border-indigo-800">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-1 flex flex-col gap-8">
-              <section className="bg-white p-8 rounded-xl shadow-sm border border-slate-150">
-                <h2 className="text-lg font-semibold text-slate-850 mb-b">
-                  Filters
-                </h2>
-                <TaskFilter
-                  searchQuery={filters.search}
-                  onSearchChange={(search) =>
-                    setFilters({ ...filters, search })
-                  }
-                  statusFilter={filters.status}
-                  onStatusFilterChange={(status) =>
-                    setFilters({ ...filters, status })
-                  }
-                  priorityFilter={filters.priority}
-                  onPriorityFilterChange={(priority) =>
-                    setFilters({ ...filters, priority })
-                  }
-                />
-              </section>
-
-              {/* <section className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-<h2 className="text-lg font-semibold text-slate-800 mb-4"> Add Task</h2>
-    <TaskForm onSubmit={handleTaskAdded}
-    />
-        </section> */}
-              {/* </div> */}
-
-              {/* <div className="text-slate-400 text-sm border-2 border-dashed border-slate-250 rounded p-4 text-center">
-            TaskFilter Component
-    </div> */}
-              {/* <div className="lg:col-span-2"> */}
-
-              <section className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
-                <h2 className="text-lg font-semibold text-slate-800 mb-4">
-                  Add Task
-                </h2>
-                <div className="text-slate-450 text-sm border-2 border-dashed border-slate-200 rounded p-4 text-center">
-                  <TaskForm onSubmit={handleTaskAdded} />
-                </div>
-              </section>
+          <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between transition-colors">
+            <div>
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Completed</p>
+              <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{sumTasksCompleted}</p>
             </div>
+            <div className="p-3 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg border border-emerald-100 dark:border-emerald-800">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+            </div>
+          </div>
 
-            <TaskList tasks={tasks} />
-            <div className="lg:col-span-2">
-              <section className="bg-white p-8 rounded-xl shadow-sm border border-slate-150 min-h-[500px]">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-xl font-semibold text-slate-800">
-                    Tasks ({sorted_filtered.length})
-                  </h2>
-                  <div className="flex items-center gap-2">
-                    <label
-                      htmlFor="sort"
-                      className="text-sm font-medium text-slate-600"
-                    >
-                      Sort by:
-                    </label>
-                    <select
-                      id="sort"
-                      value={sorting}
-                      onChange={(e) => setSorting(e.target.value as Sorting)}
-                      className="rounded-md border border-slate-300 py-1.5 pl-3 pr-8 text-sm bg-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                    >
-                      <option value="newest">Newest First</option>
-                      <option value="oldest">Oldest First</option>
-                      <option value="priority-high">
-                        Priority: High to Low
-                      </option>
-                      <option value="priority-low">
-                        Priority: Low to High
-                      </option>
-                    </select>
-                  </div>
-                </div>
-
-                <div className="text-slate-400 text-sm border-2 border-dashed border-slate-200 rounded p-12 text-center h-full flex items-center justify-center">
-                  <TaskList
-                    tasks={sorted_filtered}
-                    onToggleStatus={handleStatusToggled}
-                    onDelete={toDelete}
-                  />
-                </div>
-              </section>
+          <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center justify-between transition-colors">
+            <div>
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Pending</p>
+              <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{sumTasksPending}</p>
+            </div>
+            <div className="p-3 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-lg border border-amber-100 dark:border-amber-800">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
           </div>
         </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-1 flex flex-col gap-6">
+            <section className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 transition-colors">
+              <h2 className="text-lg font-semibold text-slate-800 dark:text-white mb-4">Filters</h2>
+              <TaskFilter searchQuery={filters.search} onSearchChange={(search) => setFilters({ ...filters, search })} statusFilter={filters.status} onStatusFilterChange={(status) => setFilters({ ...filters, status })} priorityFilter={filters.priority} onPriorityFilterChange={(priority) => setFilters({ ...filters, priority })} />
+            </section>
+
+            <section className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 transition-colors">
+              <h2 className="text-lg font-semibold text-slate-800 dark:text-white mb-4">Add Task</h2>
+              <TaskForm onSubmit={handleTaskAdded} />
+            </section>
+          </div>
+
+          <div className="lg:col-span-2">
+            <section className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 min-h-[500px] transition-colors">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                <h2 className="text-xl font-semibold text-slate-800 dark:text-white">
+                  Tasks ({sorted_filtered.length})
+                </h2>
+                <div className="flex items-center gap-2">
+                  <label htmlFor="sort" className="text-sm font-medium text-slate-600 dark:text-slate-300">Sort by:</label>
+                  <select id="sort" value={sorting} onChange={(e) => setSorting(e.target.value as Sorting)} className="rounded-md border border-slate-300 dark:border-slate-600 py-1.5 pl-3 pr-8 text-sm bg-white dark:bg-slate-700 dark:text-white focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 transition-colors">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="priority-high">Priority: High to Low</option>
+                    <option value="priority-low">Priority: Low to High</option>
+                  </select>
+                </div>
+              </div>
+              <TaskList tasks={sorted_filtered} onToggleStatus={handleStatusToggled} onDelete={toDelete} />
+            </section>
+          </div>
+        </div>
       </div>
-    </>
+    </div>
+
   );
 }
