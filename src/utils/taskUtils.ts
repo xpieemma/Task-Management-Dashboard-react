@@ -11,7 +11,7 @@ export const generatedUniqueId = (): string => {
 // Intl.DateTimeFormat ('fr-FR', {}) format dates using french/U.S date 'en-US' conventions... format() format it
 export const frmtDate = (isoString: string) : string => {
     const date = new Date(isoString);
-    return new Intl.DateTimeFormat('en-US', {
+    return new Intl.DateTimeFormat('fr-FR', {
         day: 'numeric',
         month: 'short',
         year: 'numeric'
